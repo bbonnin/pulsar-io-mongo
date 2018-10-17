@@ -1,21 +1,22 @@
 # pulsar-io-mongo
 MongoDB Sink for Apache Pulsar
 
-## How to
+## Build
 
-* Start MongoDB
 ```
-docker run --name some-mongo -d mongo:tag
+mvn clean package
+```
 
-# Connect to the image using bash
-docker exec -it some-mongo bash
-```
+> You should get a nar file in the `target` directory.
+
+
+## Deployment
 
 * Install the connector
 ```
 $ cd <PULSAR_HOME_DIRECTORY>
 $ mkdir connectors
-$ cp <PATH_TO_MONGO_CONNECTOR>/pulsar-io-mongo-2.1.1-incubating.nar connectors
+$ cp <PATH_TO_PULSAR_IO_MONGO_PROJECT>/target/pulsar-io-mongo-2.1.1-incubating.nar connectors
 ```
 
 
@@ -49,28 +50,39 @@ curl -s http://localhost:8080/admin/v2/functions/connectors
         --inputs test_mongo
     ```
     
-    * Retrieve sink info
-    ``` 
-    bin/pulsar-admin functions get \
-        --tenant public \
-        --namespace default \
-        --name mongo-test-sink
-    ```
-    
-    * Check running status
-    ``` 
-    bin/pulsar-admin functions getstatus \
-        --tenant public \
-        --namespace default \
-        --name mongo-test-sink
-    ```
-    
-    
+* Retrieve sink info
+``` 
+bin/pulsar-admin functions get \
+    --tenant public \
+    --namespace default \
+    --name mongo-test-sink
+```
+
+* Check running status
+``` 
+bin/pulsar-admin functions getstatus \
+    --tenant public \
+    --namespace default \
+    --name mongo-test-sink
+```
+
+## Test
+
+* Start MongoDB (for example with Docker)
+```
+docker run --name some-mongo -d mongo:tag
+
+# Connect to the image using bash
+docker exec -it some-mongo bash
+```
+
 * Produce some messages
 ``` 
 for i in {0..9}; do bin/pulsar-client produce -m "{'hello':$i}" -n 1 test_mongo; done
 
 ```
+
+## Misc
 
 * Delete the MongoDB Sink
 ```
