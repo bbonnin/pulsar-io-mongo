@@ -12,3 +12,6 @@ buildNumber.properties
 !/.mvn/wrapper/maven-wrapper.jar
 
 .idea
+.classpath
+.project
+.settings/
