@@ -1,6 +1,8 @@
 # pulsar-io-mongo
 MongoDB Sink for Apache Pulsar
 
+> __IMPORTANT__: as this connector has been merged into Pulsar, it is no longer maintained. For more information, see https://github.com/apache/pulsar/pull/3561.
+
 ## Build
 
 ```
