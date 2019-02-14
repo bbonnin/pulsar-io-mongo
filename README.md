@@ -37,8 +37,10 @@ curl -s http://localhost:8080/admin/v2/functions/connectors
     ```yaml
     configs:
         mongoUri: "mongodb://localhost"
-        database": "pulsar"
-        collection": "messages"
+        database: "pulsar"
+        collection: "messages"
+        batchSize: 100
+        batchTimeMs: 2000
     ```
     
     * Submit the MongoDB sink
@@ -54,7 +56,7 @@ curl -s http://localhost:8080/admin/v2/functions/connectors
     
 * Retrieve sink info
 ``` 
-bin/pulsar-admin functions get \
+bin/pulsar-admin sink get \
     --tenant public \
     --namespace default \
     --name mongo-test-sink
@@ -62,7 +64,7 @@ bin/pulsar-admin functions get \
 
 * Check running status
 ``` 
-bin/pulsar-admin functions getstatus \
+bin/pulsar-admin sink getstatus \
     --tenant public \
     --namespace default \
     --name mongo-test-sink
