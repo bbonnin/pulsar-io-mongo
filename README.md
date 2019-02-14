@@ -43,6 +43,15 @@ curl -s http://localhost:8080/admin/v2/functions/connectors
         batchTimeMs: 2000
     ```
     
+    Property | Required | Default value | Description 
+    -------- | -------- | ------------- | -----------
+    mongoUri | Yes |  | The uri of mongodb that the connector connects to (see: https://docs.mongodb.com/manual/reference/connection-string/)
+    database | Yes |  | The name of the database to which the collection belongs to
+    collection | Yes |  | The collection name that the connector writes messages to
+    batchSize | No | 100 | The batch size of write to the collection
+    batchTimeMs | No | 1000 | The batch operation interval in milliseconds
+    
+    
     * Submit the MongoDB sink
     ```
     bin/pulsar-admin sink create \
